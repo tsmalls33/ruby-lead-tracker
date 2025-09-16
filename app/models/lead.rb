@@ -25,6 +25,9 @@ class Lead < ApplicationRecord
   # Normalize phone number before saving
   before_save :normalize_phone_number
 
+  # Normalize email before saving
+  before_save :normalize_email
+
   private
 
   def contact_method_required
@@ -34,9 +37,15 @@ class Lead < ApplicationRecord
   end
 
   def normalize_phone_number
-    return if phone.blank?
-    
     # Remove all spaces, hyphens, and parentheses
     self.phone = phone.gsub(/[\s\-\(\)]/, '')
+    
+    # Turn blanks into nil
+    self.phone = nil if phone.blank?
+  end
+
+  def normalize_email
+    # Turn blanks into nil
+    self.email = nil if email.blank?
   end
 end
