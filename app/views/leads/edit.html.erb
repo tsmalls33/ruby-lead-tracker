@@ -1,12 +1,14 @@
-<% content_for :title, "Editing lead" %>
+<% content_for :title, "Edit Lead" %>
 
-<h1>Editing lead</h1>
+<div class="space-y-6">
+  <!-- Page Header -->
+  <div>
+    <h1 class="text-3xl font-bold text-gray-900">Edit Lead</h1>
+    <p class="text-gray-600 mt-2">Update <%= @lead.name %>'s information</p>
+  </div>
 
-<%= render "form", lead: @lead %>
-
-<br>
-
-<div>
-  <%= link_to "Show this lead", @lead %> |
-  <%= link_to "Back to leads", leads_path %>
+  <!-- Form Card -->
+  <div class="card">
+    <%= render "form", lead: @lead %>
+  </div>
 </div>

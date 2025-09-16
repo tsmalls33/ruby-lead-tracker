@@ -1,1 +1,169 @@
 @import "tailwindcss";
+
+/* Custom Devomart Theme */
+:root {
+  --devomart-purple: #582E39;
+  --devomart-purple-muted: rgba(88, 46, 57, 0.7);
+  --devomart-orange: #EB4F1C;
+}
+
+/* Base styling for consistent look */
+body {
+  @apply bg-gray-50 text-gray-800;
+}
+
+/* Custom button styles */
+.btn-primary {
+  @apply px-4 py-2 rounded-lg font-medium transition-all duration-200;
+  background-color: var(--devomart-purple);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--devomart-purple-muted);
+}
+
+.btn-secondary {
+  @apply bg-white px-4 py-2 rounded-lg font-medium border transition-all duration-200;
+  color: var(--devomart-purple);
+  border-color: var(--devomart-purple);
+}
+
+.btn-secondary:hover {
+  background-color: var(--devomart-purple);
+  color: white;
+}
+
+.btn-danger {
+  @apply bg-red-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-700 transition-all duration-200;
+}
+
+/* Form styling */
+.form-input {
+  @apply w-full px-3 py-2 border border-gray-300 rounded-lg;
+}
+
+.form-input:focus {
+  @apply ring-2 border-transparent;
+  ring-color: var(--devomart-purple);
+}
+
+.form-label {
+  @apply block text-sm font-medium text-gray-700 mb-2;
+}
+
+/* Card styling */
+.card {
+  @apply bg-white rounded-xl shadow-sm border border-gray-200 p-6;
+}
+
+/* Table styling */
+.table {
+  @apply w-full bg-white rounded-xl shadow-sm overflow-hidden;
+}
+
+.table thead {
+  background-color: var(--devomart-purple);
+  color: white;
+}
+
+.table th {
+  @apply px-6 py-4 text-left text-sm font-semibold;
+}
+
+.table td {
+  @apply px-6 py-4 border-b border-gray-200;
+}
+
+.table tbody tr:hover {
+  @apply bg-gray-50;
+}
+
+/* Status badges */
+.status-badge {
+  @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+}
+
+.status-new {
+  @apply bg-blue-100 text-blue-800;
+}
+
+.status-contacted {
+  @apply bg-yellow-100 text-yellow-800;
+}
+
+.status-qualified {
+  @apply bg-green-100 text-green-800;
+}
+
+.status-closed {
+  @apply bg-gray-100 text-gray-800;
+}
+
+/* Navigation styling */
+.nav-link:hover {
+  color: var(--devomart-purple);
+}
+
+/* Contact link styling */
+.contact-link {
+  color: var(--devomart-purple);
+  text-decoration: none;
+}
+
+.contact-link:hover {
+  color: var(--devomart-orange);
+}
+
+/* Contact method validation styling */
+.contact-method-field {
+  @apply transition-all duration-200;
+}
+
+.contact-status-badge {
+  @apply bg-gray-100 text-gray-600;
+}
+
+.contact-status-badge.required {
+  @apply bg-red-100 text-red-700;
+}
+
+.contact-status-badge.provided {
+  @apply bg-green-100 text-green-700;
+}
+
+.contact-status-badge.optional {
+  @apply bg-blue-100 text-blue-700;
+}
+
+.contact-input.has-error {
+  @apply border-red-300 focus:ring-red-500 focus:border-red-500;
+}
+
+.contact-input.has-value {
+  @apply border-green-300;
+}
+
+.contact-input.has-value:focus {
+  @apply ring-green-500 border-green-500;
+}
+
+.contact-feedback {
+  @apply hidden;
+}
+
+.contact-feedback.show {
+  @apply block;
+}
+
+.contact-feedback.success {
+  @apply text-green-600;
+}
+
+.contact-feedback.error {
+  @apply text-red-600;
+}
+
+.contact-feedback.warning {
+  @apply text-orange-600;
+}

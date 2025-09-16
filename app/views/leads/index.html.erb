@@ -1,16 +1,97 @@
-<p style="color: green"><%= notice %></p>
-
 <% content_for :title, "Leads" %>
 
-<h1>Leads</h1>
+<div class="space-y-6">
+  <!-- Page Header -->
+  <div class="sm:flex sm:items-center sm:justify-between">
+    <div>
+      <h1 class="text-3xl font-bold text-gray-900">Leads</h1>
+      <p class="text-gray-600 mt-2">Manage and track your sales leads</p>
+    </div>
+    <div class="mt-4 sm:mt-0">
+      <%= link_to "New Lead", new_lead_path, class: "btn-primary" %>
+    </div>
+  </div>
 
-<div id="leads">
-  <% @leads.each do |lead| %>
-    <%= render lead %>
-    <p>
-      <%= link_to "Show this lead", lead %>
-    </p>
-  <% end %>
+  <!-- Leads Table -->
+  <div class="bg-white shadow-sm rounded-xl overflow-hidden">
+    <% if @leads.any? %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Status</th>
+            <th>Notes</th>
+            <th class="w-32">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @leads.each do |lead| %>
+            <tr>
+              <td>
+                <div class="font-medium text-gray-900"><%= lead.name %></div>
+              </td>
+              <td>
+                <% if lead.email.present? %>
+                  <a href="mailto:<%= lead.email %>" class="contact-link">
+                    <%= lead.email %>
+                  </a>
+                <% else %>
+                  <span class="text-gray-400">—</span>
+                <% end %>
+              </td>
+              <td>
+                <% if lead.phone.present? %>
+                  <a href="<%= whatsapp_link(lead.phone) %>" target="_blank" class="contact-link" title="Open in WhatsApp">
+                    <%= lead.phone %>
+                  </a>
+                <% else %>
+                  <span class="text-gray-400">—</span>
+                <% end %>
+              </td>
+              <td>
+                <% if lead.status.present? %>
+                  <span class="status-badge <%= "status-#{lead.status.downcase}" %>"><%= lead.status.titleize %></span>
+                <% else %>
+                  <span class="status-badge status-new">New</span>
+                <% end %>
+              </td>
+              <td>
+                <% if lead.notes.present? %>
+                  <div class="max-w-xs truncate" title="<%= lead.notes %>">
+                    <%= lead.notes %>
+                  </div>
+                <% else %>
+                  <span class="text-gray-400">—</span>
+                <% end %>
+              </td>
+              <td>
+                <div class="flex space-x-2">
+                  <%= link_to lead, class: "contact-link text-sm font-medium" do %>
+                    View
+                  <% end %>
+                  <%= link_to edit_lead_path(lead), class: "text-gray-600 hover:text-gray-900 text-sm font-medium" do %>
+                    Edit
+                  <% end %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <!-- Empty state -->
+      <div class="text-center py-12">
+        <div class="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
+          <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+        </div>
+        <h3 class="text-lg font-medium text-gray-900 mb-2">No leads yet</h3>
+        <p class="text-gray-600 mb-6">Get started by creating your first lead.</p>
+        <%= link_to "Create your first lead", new_lead_path, class: "btn-primary" %>
+      </div>
+    <% end %>
+  </div>
 </div>
-
-<%= link_to "New lead", new_lead_path %>

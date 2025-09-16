@@ -1,10 +1,93 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :title, @lead.name %>
 
-<%= render @lead %>
+<div class="space-y-6">
+  <!-- Page Header -->
+  <div class="sm:flex sm:items-center sm:justify-between">
+    <div>
+      <h1 class="text-3xl font-bold text-gray-900"><%= @lead.name %></h1>
+      <div class="mt-2 flex items-center space-x-2">
+        <% if @lead.status.present? %>
+          <span class="status-badge <%= "status-#{@lead.status.downcase}" %>"><%= @lead.status.titleize %></span>
+        <% else %>
+          <span class="status-badge status-new">New</span>
+        <% end %>
+        <span class="text-gray-400">•</span>
+        <span class="text-gray-600">Lead Details</span>
+      </div>
+    </div>
+    <div class="mt-4 sm:mt-0 flex space-x-3">
+      <%= link_to "Edit Lead", edit_lead_path(@lead), class: "btn-secondary" %>
+      <%= link_to "Back to Leads", leads_path, class: "btn-secondary" %>
+    </div>
+  </div>
 
-<div>
-  <%= link_to "Edit this lead", edit_lead_path(@lead) %> |
-  <%= link_to "Back to leads", leads_path %>
+  <!-- Lead Details Card -->
+  <div class="card">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wide">Contact Information</h3>
+        <dl class="mt-4 space-y-4">
+          <div>
+            <dt class="text-sm font-medium text-gray-900">Name</dt>
+            <dd class="text-sm text-gray-600 mt-1"><%= @lead.name %></dd>
+          </div>
+          
+          <% if @lead.email.present? %>
+            <div>
+              <dt class="text-sm font-medium text-gray-900">Email</dt>
+              <dd class="text-sm mt-1">
+                <a href="mailto:<%= @lead.email %>" class="contact-link">
+                  <%= @lead.email %>
+                </a>
+              </dd>
+            </div>
+          <% end %>
+          
+          <% if @lead.phone.present? %>
+            <div>
+              <dt class="text-sm font-medium text-gray-900">Phone</dt>
+              <dd class="text-sm mt-1">
+                <a href="<%= whatsapp_link(@lead.phone) %>" target="_blank" class="contact-link" title="Open in WhatsApp">
+                  <%= @lead.phone %>
+                </a>
+              </dd>
+            </div>
+          <% end %>
+        </dl>
+      </div>
+      
+      <div>
+        <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wide">Lead Status</h3>
+        <dl class="mt-4 space-y-4">
+          <div>
+            <dt class="text-sm font-medium text-gray-900">Status</dt>
+            <dd class="text-sm mt-1">
+              <% if @lead.status.present? %>
+                <span class="status-badge <%= "status-#{@lead.status.downcase}" %>"><%= @lead.status.titleize %></span>
+              <% else %>
+                <span class="status-badge status-new">New</span>
+              <% end %>
+            </dd>
+          </div>
+          
+          <% if @lead.notes.present? %>
+            <div>
+              <dt class="text-sm font-medium text-gray-900">Notes</dt>
+              <dd class="text-sm text-gray-600 mt-1 whitespace-pre-line"><%= @lead.notes %></dd>
+            </div>
+          <% end %>
+        </dl>
+      </div>
+    </div>
+  </div>
 
-  <%= button_to "Destroy this lead", @lead, method: :delete %>
+  <!-- Danger Zone -->
+  <div class="card border-red-200">
+    <h3 class="text-lg font-medium text-red-900 mb-4">Danger Zone</h3>
+    <p class="text-sm text-red-600 mb-4">Once you delete a lead, there is no going back. Please be certain.</p>
+    <%= button_to "Delete this lead", @lead, method: :delete, 
+        class: "btn-danger",
+        confirm: "Are you sure you want to delete #{@lead.name}? This action cannot be undone.",
+        form: { class: "inline" } %>
+  </div>
 </div>
