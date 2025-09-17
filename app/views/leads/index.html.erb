@@ -30,7 +30,9 @@
           <% @leads.each do |lead| %>
             <tr>
               <td>
-                <div class="font-medium text-gray-900"><%= lead.name %></div>
+                <%= link_to lead, class: "contact-link" do %>
+                <div class="font-medium text-lg"><%= lead.name %></div>
+                <% end %>
               </td>
               <td>
                 <% if lead.email.present? %>
@@ -68,11 +70,8 @@
               </td>
               <td>
                 <div class="flex space-x-2">
-                  <%= link_to lead, class: "contact-link text-sm font-medium" do %>
-                    View
-                  <% end %>
-                  <%= link_to edit_lead_path(lead), class: "text-gray-600 hover:text-gray-900 text-sm font-medium" do %>
-                    Edit
+                  <%= link_to edit_lead_path(lead), class: "text-gray-600 hover:text-gray-900 text-medium font-medium" do %>
+                    <%= render "shared/icons/pencil", class: "w-5 h-5" %>
                   <% end %>
                 </div>
               </td>
