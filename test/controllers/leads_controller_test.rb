@@ -17,7 +17,7 @@ class LeadsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create lead" do
     assert_difference("Lead.count") do
-      post leads_url, params: { lead: { email: @lead.email, name: @lead.name, notes: @lead.notes, phone: @lead.phone, status: @lead.status } }
+      post leads_url, params: { lead: { email: "unique@email.com", name: @lead.name, notes: @lead.notes, phone: "999999999", status: @lead.status } }
     end
 
     assert_redirected_to lead_url(Lead.last)

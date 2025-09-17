@@ -1,15 +1,22 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  email: MyString
-  phone: MyString
+  name: "one lead"
+  email: "one@example.com"
+  phone: "111111111"
   status: MyString
   notes: MyString
 
 two:
-  name: MyString
-  email: MyString
-  phone: MyString
+  name: "two lead"
+  email: "two@example.com"
+  phone: "222222222"
+  status: MyString
+  notes: MyString
+
+three:
+  name: "three lead"
+  email: "three@example.com"
+  phone: "333333333"
   status: MyString
   notes: MyString

@@ -60,11 +60,11 @@ class LeadsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_lead
-      @lead = Lead.find(params.expect(:id))
+      @lead = Lead.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def lead_params
-      params.expect(lead: [ :name, :email, :phone, :status, :notes ])
+      params.require(:lead).permit(:name, :email, :phone, :status, :notes)
     end
 end
