@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resource :session
+  resources :passwords, param: :token
   # TODO: Create api versioning structure and namespaces
   resources :leads
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
